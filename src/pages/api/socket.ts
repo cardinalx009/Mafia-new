@@ -3,8 +3,8 @@ import type {NextApiResponse} from "next";
 import {Server as IOServer} from "socket.io";
 
 type NextApiResponseWithSocket = NextApiResponse & {
-  socket: NonNullable<NextApiResponse["socket"]> & {
-    server: NonNullable<NonNullable<NextApiResponse["socket"]>["server"]> & {
+  socket: NextApiResponse["socket"] & {
+    server: {
       io?: IOServer;
     };
   };
