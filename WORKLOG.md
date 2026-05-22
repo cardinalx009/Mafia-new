@@ -12,6 +12,7 @@
 - Railway build’dagi TypeScript xato tuzatildi: NextApiResponse socket type’da `server` typing yo‘qligi uchun socket type soddalashtirildi
 - Railway build’dagi TypeScript xato tuzatildi: Socket.IO server constructor overload’i uchun real `res.socket.server` instance’ga `as any` orqali ulash qilindi
 - Railway build’dagi Prisma xato tuzatildi: production install’da Prisma Client generate bo‘lmagani uchun build’dan oldin `prisma generate` ishga tushirildi (postinstall + build script)
+- Railway build’da Prisma engine xato tuzatildi: Prisma Client `engineType` aniq `binary` qilib belgilandi, app layout esa build paytida DB/auth yiqilmasligi uchun dynamic qilindi
 
 ### Fayllar
 - API socket: src/pages/api/socket.ts
@@ -19,6 +20,8 @@
 - Next config: next.config.ts
 - Ignore: .gitignore
 - i18n config: src/i18n/request.ts
+- Prisma schema: prisma/schema.prisma
+- App layout: src/app/[locale]/(app)/layout.tsx
 
 ### Keyingi qadam (reja)
 - Dizayn sistemasi (ranglar/komponentlar) va Play/Lobby UI’ni “qaytib kirgisi keladigan” ko‘rinishga olib kelish

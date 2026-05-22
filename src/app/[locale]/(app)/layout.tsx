@@ -2,12 +2,14 @@ import {SessionProvider} from "@/components/providers/SessionProvider";
 import {AppHeader} from "@/components/AppHeader";
 import {getServerAuthSession} from "@/server/auth";
 
+export const dynamic = "force-dynamic";
+
 export default async function AppLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerAuthSession();
+  const session = await getServerAuthSession().catch(() => null);
 
   return (
     <SessionProvider session={session}>
@@ -18,4 +20,3 @@ export default async function AppLayout({
     </SessionProvider>
   );
 }
-
