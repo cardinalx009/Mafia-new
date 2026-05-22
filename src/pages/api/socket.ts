@@ -2,14 +2,6 @@ import type {NextApiRequest} from "next";
 import type {NextApiResponse} from "next";
 import {Server as IOServer} from "socket.io";
 
-type NextApiResponseWithSocket = NextApiResponse & {
-  socket: NextApiResponse["socket"] & {
-    server: {
-      io?: IOServer;
-    };
-  };
-};
-
 type PlayerPublic = {
   id: string;
   name: string;
@@ -53,13 +45,19 @@ function randomCode(len = 6) {
   return s;
 }
 
-export default function handler(req: NextApiRequest, res: NextApiResponseWithSocket) {
-  if (!res.socket.server.io) {
-    const io = new IOServer(res.socket.server, {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  const server = (res as any).socket?.server as (object & {io?: IOServer}) | undefined;
+  if (!server) {
+    res.end();
+    return;
+  }
+
+  if (!server.io) {
+    const io = new IOServer(server as any, {
       path: "/api/socketio",
       addTrailingSlash: false,
     });
-    res.socket.server.io = io;
+    server.io = io;
 
     io.on("connection", (socket) => {
       socket.on("matchmaking:find", ({playerCount, player}: {playerCount: number; player: PlayerPublic}) => {
