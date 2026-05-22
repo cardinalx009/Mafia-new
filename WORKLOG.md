@@ -8,6 +8,7 @@
 - Git ignore: local dev.db endi commit bo‘lmaydi
 - GitHub push muammolari (user.name/user.email, SSH key) bo‘yicha yo‘l-yo‘riq berildi va SSH public key yaratildi
 - Railway build’dagi TypeScript xato tuzatildi: next-intl request locale undefined bo‘lishi mumkinligi uchun guard qo‘shildi
+- Railway build’dagi TypeScript xato tuzatildi: NextApiResponse socket type’da null bo‘lishi mumkinligi uchun NonNullable bilan type guard qo‘shildi
 
 ### Fayllar
 - API socket: src/pages/api/socket.ts
