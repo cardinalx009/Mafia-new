@@ -20,7 +20,7 @@ function pickLocaleFromAcceptLanguage(value: string | null): Locale {
 export default getRequestConfig(async ({locale}) => {
   const hdrs = await headers();
   const detected = pickLocaleFromAcceptLanguage(hdrs.get("accept-language"));
-  const safeLocale = (locales as readonly string[]).includes(locale)
+  const safeLocale = typeof locale === "string" && (locales as readonly string[]).includes(locale)
     ? (locale as Locale)
     : detected;
 
@@ -29,4 +29,3 @@ export default getRequestConfig(async ({locale}) => {
     messages: (await import(`../../messages/${safeLocale}.json`)).default,
   };
 });
-

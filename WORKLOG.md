@@ -6,12 +6,15 @@
 - Lobby player list’ga real avatar chiqarish qo‘shildi (Google profili)
 - Next Image remotePatterns yangilandi (Google avatarlar uchun)
 - Git ignore: local dev.db endi commit bo‘lmaydi
+- GitHub push muammolari (user.name/user.email, SSH key) bo‘yicha yo‘l-yo‘riq berildi va SSH public key yaratildi
+- Railway build’dagi TypeScript xato tuzatildi: next-intl request locale undefined bo‘lishi mumkinligi uchun guard qo‘shildi
 
 ### Fayllar
 - API socket: src/pages/api/socket.ts
 - Lobby UI: src/app/[locale]/(app)/lobby/[roomCode]/lobby-client.tsx
 - Next config: next.config.ts
 - Ignore: .gitignore
+- i18n config: src/i18n/request.ts
 
 ### Keyingi qadam (reja)
 - Dizayn sistemasi (ranglar/komponentlar) va Play/Lobby UI’ni “qaytib kirgisi keladigan” ko‘rinishga olib kelish
