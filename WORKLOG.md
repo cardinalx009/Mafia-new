@@ -13,6 +13,7 @@
 - Railway build’dagi TypeScript xato tuzatildi: Socket.IO server constructor overload’i uchun real `res.socket.server` instance’ga `as any` orqali ulash qilindi
 - Railway build’dagi Prisma xato tuzatildi: production install’da Prisma Client generate bo‘lmagani uchun build’dan oldin `prisma generate` ishga tushirildi (postinstall + build script)
 - Railway build’da Prisma engine xato tuzatildi: Prisma Client `engineType` aniq `binary` qilib belgilandi, app layout esa build paytida DB/auth yiqilmasligi uchun dynamic qilindi
+- Railway build’da Prisma engine xato uchun Node versiya pin qilindi: Prisma binary engine mosligi uchun `package.json`ga `engines.node = 20.x` qo‘shildi
 
 ### Fayllar
 - API socket: src/pages/api/socket.ts
