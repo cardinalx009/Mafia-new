@@ -14,6 +14,7 @@
 - Railway build’dagi Prisma xato tuzatildi: production install’da Prisma Client generate bo‘lmagani uchun build’dan oldin `prisma generate` ishga tushirildi (postinstall + build script)
 - Railway build’da Prisma engine xato tuzatildi: Prisma Client `engineType` aniq `binary` qilib belgilandi, app layout esa build paytida DB/auth yiqilmasligi uchun dynamic qilindi
 - Railway build’da Prisma engine xato uchun Node versiya pin qilindi: Prisma binary engine mosligi uchun `package.json`ga `engines.node = 20.x` qo‘shildi
+- Railway build’da Prisma constructor xato tuzatildi: env (`DATABASE_URL`) yo‘q paytda PrismaClient umuman yaratilmaydi (lazy init), NextAuth esa vaqtincha `jwt` session strategy bilan build’dan o‘tadi
 
 ### Fayllar
 - API socket: src/pages/api/socket.ts
@@ -23,6 +24,8 @@
 - i18n config: src/i18n/request.ts
 - Prisma schema: prisma/schema.prisma
 - App layout: src/app/[locale]/(app)/layout.tsx
+- Prisma client init: src/server/db.ts
+- NextAuth config: src/server/auth.ts
 
 ### Keyingi qadam (reja)
 - Dizayn sistemasi (ranglar/komponentlar) va Play/Lobby UI’ni “qaytib kirgisi keladigan” ko‘rinishga olib kelish
