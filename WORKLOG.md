@@ -11,6 +11,7 @@
 - Railway build’dagi TypeScript xato tuzatildi: NextApiResponse socket type’da null bo‘lishi mumkinligi uchun NonNullable bilan type guard qo‘shildi
 - Railway build’dagi TypeScript xato tuzatildi: NextApiResponse socket type’da `server` typing yo‘qligi uchun socket type soddalashtirildi
 - Railway build’dagi TypeScript xato tuzatildi: Socket.IO server constructor overload’i uchun real `res.socket.server` instance’ga `as any` orqali ulash qilindi
+- Railway build’dagi Prisma xato tuzatildi: production install’da Prisma Client generate bo‘lmagani uchun build’dan oldin `prisma generate` ishga tushirildi (postinstall + build script)
 
 ### Fayllar
 - API socket: src/pages/api/socket.ts
