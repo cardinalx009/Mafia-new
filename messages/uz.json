@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "play": "Play",
+    "profile": "Profil",
+    "inventory": "Inventar",
+    "shop": "Do‘kon",
+    "rules": "Qoidalar",
+    "settings": "Sozlamalar",
+    "signIn": "Kirish",
+    "signOut": "Chiqish"
+  },
+  "home": {
+    "title": "Mafia",
+    "subtitle": "Tez matchmaking, private room va qulay dizayn."
+  },
+  "play": {
+    "title": "O‘ynash",
+    "players": "O‘yinchi soni",
+    "findMatch": "O‘yin topish",
+    "createRoom": "Room yaratish",
+    "roomCode": "Room kodi"
+  },
+  "lobby": {
+    "title": "Lobby",
+    "players": "O‘yinchilar",
+    "chat": "Chat",
+    "start": "O‘yinni boshlash"
+  }
+}
+

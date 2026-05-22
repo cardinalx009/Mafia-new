@@ -1,0 +1,155 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// --- Auth (NextAuth.js) ---
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+
+  accounts Account[]
+  sessions Session[]
+
+  profile Profile?
+  wallet  Wallet?
+
+  inventory UserInventory[]
+  messages  Message[]
+  matchPlayers MatchPlayer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  @@unique([identifier, token])
+}
+
+// --- Game / Platform ---
+model Profile {
+  id        String @id @default(cuid())
+  userId    String @unique
+  username  String @unique
+  level     Int    @default(1)
+  xp        Int    @default(0)
+  country   String?
+  language  String? // "uz" | "ru" | "en" (auto by region, user can override later)
+
+  gamesPlayed Int @default(0)
+  gamesWon    Int @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Wallet {
+  id      String @id @default(cuid())
+  userId  String @unique
+  coins   Int    @default(0)
+  diamonds Int   @default(0)
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ShopItem {
+  id          String @id @default(cuid())
+  sku         String @unique
+  name        String
+  description String
+  currency    String // "coins" | "diamonds"
+  price       Int
+  consumable  Boolean @default(false)
+  createdAt   DateTime @default(now())
+
+  inventories UserInventory[]
+}
+
+model UserInventory {
+  id        String @id @default(cuid())
+  userId    String
+  itemId    String
+  quantity  Int    @default(1)
+  createdAt DateTime @default(now())
+
+  user User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  item ShopItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, itemId])
+}
+
+model Match {
+  id            String   @id @default(cuid())
+  roomCode      String   @unique
+  status        String   @default("lobby") // lobby | running | finished
+  playerCount   Int      @default(4)
+  createdAt     DateTime @default(now())
+  startedAt     DateTime?
+  finishedAt    DateTime?
+  players       MatchPlayer[]
+  messages      Message[]
+}
+
+model MatchPlayer {
+  id        String   @id @default(cuid())
+  matchId   String
+  userId    String
+  role      String?  // assigned when game starts: mafia/doctor/detective/citizen/...
+  alive     Boolean  @default(true)
+  joinedAt  DateTime @default(now())
+
+  match Match @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([matchId, userId])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  matchId   String
+  userId    String
+  text      String
+  createdAt DateTime @default(now())
+
+  match Match @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

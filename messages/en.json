@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "play": "Play",
+    "profile": "Profile",
+    "inventory": "Inventory",
+    "shop": "Shop",
+    "rules": "Rules",
+    "settings": "Settings",
+    "signIn": "Sign in",
+    "signOut": "Sign out"
+  },
+  "home": {
+    "title": "Mafia",
+    "subtitle": "Fast matchmaking, private rooms and fun UI."
+  },
+  "play": {
+    "title": "Play",
+    "players": "Players",
+    "findMatch": "Find match",
+    "createRoom": "Create room",
+    "roomCode": "Room code"
+  },
+  "lobby": {
+    "title": "Lobby",
+    "players": "Players",
+    "chat": "Chat",
+    "start": "Start game"
+  }
+}
+
